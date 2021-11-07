@@ -5,6 +5,9 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from "./users/user.model";
+import { BudgetModule } from './budget/budget.module';
+import { Budget } from "./budget/budget.model";
 @Module({
   imports: [
     AuthModule,
@@ -21,10 +24,11 @@ import { SequelizeModule } from '@nestjs/sequelize';
           username: configService.get<string>('DB_USERNAME'),
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_NAME'),
-          models: [],
+          models: [User, Budget],
         }
       },
-    })
+    }),
+    BudgetModule
   ],
   controllers: [AppController],
   providers: [AppService]

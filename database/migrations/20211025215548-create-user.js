@@ -11,7 +11,8 @@ module.exports = {
     await queryInterface.createTable('users', {
       id: {
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE
@@ -19,8 +20,14 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE
       },
-      email: Sequelize.STRING,
-      pass_hash: Sequelize.STRING
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      pass_hash: {
+        type: Sequelize.STRING,
+        allowNull: false
+      }
     });
   },
 

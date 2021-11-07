@@ -11,7 +11,8 @@ module.exports = {
     await queryInterface.createTable('tags', {
       id: {
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE
@@ -19,7 +20,10 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE
       },
-      name: Sequelize.STRING
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      }
     });
   },
 

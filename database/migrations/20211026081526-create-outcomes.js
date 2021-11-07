@@ -11,7 +11,8 @@ module.exports = {
     await queryInterface.createTable('outcomes', {
       id: {
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE

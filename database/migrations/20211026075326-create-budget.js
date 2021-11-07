@@ -11,7 +11,8 @@ module.exports = {
     await queryInterface.createTable('budgets', {
       id: {
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE
@@ -19,8 +20,30 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE
       },
-      amount: Sequelize.DOUBLE,
-      currency: Sequelize.STRING
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      amount: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+      },
+      currency: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      userId: {
+        type: Sequelize.UUID,
+        references: {
+          model: {
+            tableName: 'users'
+          },
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+      },
+
     });
   },
 
