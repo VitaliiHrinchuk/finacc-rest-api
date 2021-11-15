@@ -4,6 +4,7 @@ import { InjectModel } from "@nestjs/sequelize";
 import { Budget } from "./budget.model";
 import { UsersService } from "../users/users.service";
 import { v4 as uuidv4 } from 'uuid';
+import { UpdateBudgetDto } from "./dto/UpdateBudgetDto";
 
 
 @Injectable()
@@ -39,5 +40,51 @@ export class BudgetService {
     }
 
     return budget;
+  }
+
+  async findAll(userId: string): Promise<Array<Budget>> {
+    const budgets = await this.budgets.findAll({
+      where: {
+        userId: userId
+      }
+    });
+
+    return budgets;
+  }
+
+  async update(updateBudgetDto: UpdateBudgetDto, userId: string, budgetId: string): Promise<Budget> {
+    const budget = await this.budgets.findOne({
+      where: {
+        id: budgetId,
+        userId: userId
+      }
+    });
+
+    if (!budget) {
+      throw new NotFoundException("Budget not found");
+    }
+
+    budget.setAttributes({
+      amount: updateBudgetDto.amount,
+      currency: updateBudgetDto.currency,
+      name: updateBudgetDto.name,
+    })
+
+    return budget.save();
+  }
+
+  async delete(budgetId: string, userId: string): Promise<void> {
+    const budget = await this.budgets.findOne({
+      where: {
+        id: budgetId,
+        userId: userId
+      }
+    });
+
+    if (!budget) {
+      throw new NotFoundException("Budget not found");
+    }
+
+    return await budget.destroy();
   }
 }
