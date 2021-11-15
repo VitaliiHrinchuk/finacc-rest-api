@@ -10,6 +10,8 @@ import { BudgetModule } from './budget/budget.module';
 import { Budget } from "./budget/budget.model";
 import { TagModule } from './tag/tag.module';
 import { Tag } from "./tag/tag.model";
+import { IncomeCategory } from "./income-category/income-category.model";
+import { IncomeCategoryModule } from "./income-category/income-category.module";
 @Module({
   imports: [
     AuthModule,
@@ -26,12 +28,13 @@ import { Tag } from "./tag/tag.model";
           username: configService.get<string>('DB_USERNAME'),
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_NAME'),
-          models: [User, Budget, Tag],
+          models: [User, Budget, Tag, IncomeCategory],
         }
       },
     }),
     BudgetModule,
-    TagModule
+    TagModule,
+    IncomeCategoryModule
   ],
   controllers: [AppController],
   providers: [AppService]

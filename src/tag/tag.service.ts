@@ -58,7 +58,7 @@ export class TagService {
         userId: {
           [Op.or]: [userId, null]
         }
-      }
+      },
     });
 
     return tags;
