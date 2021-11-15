@@ -12,6 +12,8 @@ import { TagModule } from './tag/tag.module';
 import { Tag } from "./tag/tag.model";
 import { IncomeCategory } from "./income-category/income-category.model";
 import { IncomeCategoryModule } from "./income-category/income-category.module";
+import { OutcomeCategory } from "./outcome-category/outcome-category.model";
+import { OutcomeCategoryModule } from "./outcome-category/outcome-category.module";
 @Module({
   imports: [
     AuthModule,
@@ -28,13 +30,14 @@ import { IncomeCategoryModule } from "./income-category/income-category.module";
           username: configService.get<string>('DB_USERNAME'),
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_NAME'),
-          models: [User, Budget, Tag, IncomeCategory],
+          models: [User, Budget, Tag, IncomeCategory, OutcomeCategory],
         }
       },
     }),
     BudgetModule,
     TagModule,
-    IncomeCategoryModule
+    IncomeCategoryModule,
+    OutcomeCategoryModule
   ],
   controllers: [AppController],
   providers: [AppService]
