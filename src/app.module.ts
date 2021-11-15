@@ -8,6 +8,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from "./users/user.model";
 import { BudgetModule } from './budget/budget.module';
 import { Budget } from "./budget/budget.model";
+import { TagModule } from './tag/tag.module';
+import { Tag } from "./tag/tag.model";
 @Module({
   imports: [
     AuthModule,
@@ -24,11 +26,12 @@ import { Budget } from "./budget/budget.model";
           username: configService.get<string>('DB_USERNAME'),
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_NAME'),
-          models: [User, Budget],
+          models: [User, Budget, Tag],
         }
       },
     }),
-    BudgetModule
+    BudgetModule,
+    TagModule
   ],
   controllers: [AppController],
   providers: [AppService]
