@@ -50,7 +50,11 @@ export class OutcomeService {
       userId: createOutcomeDto.userId
     });
 
-    return outcome;
+    await this.budgetService.updateBudgetAmount(outcome.budgetId, outcome.currency, -outcome.amount);
+
+    return outcome.reload({
+      include: [Budget]
+    });
   }
 
   async findAll(userId: string): Promise<Array<Outcome>> {

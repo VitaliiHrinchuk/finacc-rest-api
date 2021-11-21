@@ -5,13 +5,15 @@ import { Budget } from "./budget.model";
 import { UsersService } from "../users/users.service";
 import { v4 as uuidv4 } from 'uuid';
 import { UpdateBudgetDto } from "./dto/UpdateBudgetDto";
+import { CurrencyService } from "../currency/currency.service";
 
 
 @Injectable()
 export class BudgetService {
   constructor(
     @InjectModel(Budget) private budgets: typeof Budget,
-    private userService: UsersService
+    private userService: UsersService,
+    private currencyService: CurrencyService
   ) {}
 
   async create(createBudgetDto: CreateBudgetDto, userId: string): Promise<Budget> {
@@ -90,5 +92,17 @@ export class BudgetService {
 
   findById(id: string): Promise<Budget | null> {
     return this.budgets.findByPk(id);
+  }
+
+  async updateBudgetAmount(budgetId: string, targetCurrency: string, amount: number): Promise<void> {
+    console.log('====== Updating budget amount...');
+    const budget: Budget = await this.findById(budgetId);
+    const convertedAmount: number = await this.convertCurrency(budget.currency, targetCurrency, amount);
+    budget.amount = budget.amount + convertedAmount;
+    await budget.save();
+  }
+
+  async convertCurrency(base: string, target: string, amount: number){
+    return this.currencyService.convert(base, target, amount);
   }
 }

@@ -50,7 +50,11 @@ export class IncomeService {
       userId: createIncomeDto.userId
     });
 
-    return income;
+    await this.budgetService.updateBudgetAmount(income.budgetId, income.currency, income.amount);
+
+    return income.reload({
+      include: [Budget]
+    });
   }
 
   async findAll(userId: string): Promise<Array<Income>> {

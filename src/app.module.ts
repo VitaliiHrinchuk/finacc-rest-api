@@ -18,6 +18,7 @@ import { IncomeModule } from "./income/income.module";
 import { Income } from "./income/income.model";
 import { Outcome } from "./outcome/outcome.model";
 import { OutcomeModule } from "./outcome/outcome.module";
+import { CurrencyModule } from './currency/currency.module';
 
 @Module({
   imports: [
@@ -44,7 +45,8 @@ import { OutcomeModule } from "./outcome/outcome.module";
     IncomeCategoryModule,
     OutcomeCategoryModule,
     IncomeModule,
-    OutcomeModule
+    OutcomeModule,
+    CurrencyModule
   ],
   controllers: [AppController],
   providers: [AppService]
