@@ -87,4 +87,8 @@ export class BudgetService {
 
     return await budget.destroy();
   }
+
+  findById(id: string): Promise<Budget | null> {
+    return this.budgets.findByPk(id);
+  }
 }

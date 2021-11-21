@@ -14,6 +14,8 @@ import { IncomeCategory } from "./income-category/income-category.model";
 import { IncomeCategoryModule } from "./income-category/income-category.module";
 import { OutcomeCategory } from "./outcome-category/outcome-category.model";
 import { OutcomeCategoryModule } from "./outcome-category/outcome-category.module";
+import { IncomeModule } from './income/income.module';
+import { Income } from "./income/income.model";
 @Module({
   imports: [
     AuthModule,
@@ -30,14 +32,15 @@ import { OutcomeCategoryModule } from "./outcome-category/outcome-category.modul
           username: configService.get<string>('DB_USERNAME'),
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_NAME'),
-          models: [User, Budget, Tag, IncomeCategory, OutcomeCategory],
+          models: [User, Budget, Tag, IncomeCategory, OutcomeCategory, Income],
         }
       },
     }),
     BudgetModule,
     TagModule,
     IncomeCategoryModule,
-    OutcomeCategoryModule
+    OutcomeCategoryModule,
+    IncomeModule
   ],
   controllers: [AppController],
   providers: [AppService]

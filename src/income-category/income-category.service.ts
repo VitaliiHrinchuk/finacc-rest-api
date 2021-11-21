@@ -105,4 +105,8 @@ export class IncomeCategoryService {
 
     return await category.destroy();
   }
+
+  findById(id: string): Promise<IncomeCategory | null> {
+    return this.incomeCategory.findByPk(id);
+  }
 }

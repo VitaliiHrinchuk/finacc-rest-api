@@ -44,7 +44,19 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade',
         allowNull: false
-      }
+      },
+      userId: {
+        type: Sequelize.UUID,
+        references: {
+          model: {
+            tableName: 'users'
+          },
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+        allowNull: false
+      },
     });
   },
 
