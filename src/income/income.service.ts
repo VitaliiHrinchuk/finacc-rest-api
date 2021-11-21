@@ -83,7 +83,6 @@ export class IncomeService {
       throw new NotFoundException();
     }
 
-
     return income;
   }
 

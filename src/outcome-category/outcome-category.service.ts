@@ -6,6 +6,7 @@ import { OutcomeCategory } from "./outcome-category.model";
 import { CreateOutcomeCategoryDto } from "./dto/CreateOutcomeCategoryDto";
 import { Op } from "sequelize";
 import { UpdateOutcomeCategoryDto } from "./dto/UpdateOutcomeCategoryDto";
+import { IncomeCategory } from "../income-category/income-category.model";
 
 
 @Injectable()
@@ -104,5 +105,9 @@ export class OutcomeCategoryService {
     }
 
     return await category.destroy();
+  }
+
+  findById(id: string): Promise<IncomeCategory | null> {
+    return this.outcomeCategory.findByPk(id);
   }
 }

@@ -57,6 +57,18 @@ module.exports = {
         onDelete: 'cascade',
         allowNull: false
       },
+      budgetId: {
+        type: Sequelize.UUID,
+        references: {
+          model: {
+            tableName: 'budgets'
+          },
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+        allowNull: false
+      },
     });
   },
 
